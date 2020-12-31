@@ -1,7 +1,7 @@
 version: 2.1
 
 # Author: Gleams
-# Version: 1.1
+# Version: 1.2
 
 #----------------------
 # Common
@@ -43,7 +43,7 @@ jobs:
       - checkout
       - run:
           command: |
-            mkdir -p circleci-demo-python-flask/test-reports
+            mkdir -p test-reports
       - run:
           name: Download Selenium
           command: |
@@ -51,30 +51,28 @@ jobs:
       - run:
           name: Start Selenium
           command: |
-            java -jar selenium-server-standalone-3.5.3.jar -log circleci-demo-python-flask/test-reports/selenium.log
+            java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
       - restore_cache:
-          key: deps2-{{ checksum "circleci-demo-python-flask/requirements/dev.txt" }}
+          key: deps2-{{ checksum "requirements/dev.txt" }}
       - run:
           command: |
-            cd circleci-demo-python-flask
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps2-{{ checksum "circleci-demo-python-flask/requirements/dev.txt" }}
+          key: deps2-{{ checksum "requirements/dev.txt" }}
           paths:
             - 'venv'
       - run:
           command: |
-            cd circleci-demo-python-flask
             . venv/bin/activate
             python manage.py test
       - store_artifacts:
-          path: circleci-demo-python-flask/test-reports/
+          path: test-reports/
           destination: tr1
       - store_test_results:
-          path: circleci-demo-python-flask/test-reports/
+          path: test-reports/
 
   deploy:
     executor: heroku/default
