@@ -6,9 +6,9 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.1
 
-############
+#----------------------
 # Workflows
-############
+#----------------------
 workflows:
   version: 2
   build-deploy:
@@ -21,9 +21,9 @@ workflows:
             branches:
               only: master
 
-##################
+#----------------------
 # Job Definitions
-##################
+#----------------------
 jobs:
   build:
     docker:
