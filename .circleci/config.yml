@@ -19,7 +19,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 
 #----------------------
 # Job Definitions
