@@ -1,5 +1,7 @@
 version: 2.1
 
+# Author: Gleams
+
 #----------------------
 # Common
 #----------------------
@@ -19,7 +21,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: main
 
 #----------------------
 # Job Definitions
